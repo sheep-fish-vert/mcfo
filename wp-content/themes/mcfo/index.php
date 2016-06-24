@@ -6,7 +6,15 @@ $include_url = TEMPLATEPATH . '/partials/';
 include $include_url . 'main_topslider.php';
 include $include_url . 'main_pair_slider.php';
 include $include_url . 'main_sloika.php';
+// ======
 include $include_url . 'main_partners.php';
+
 include $include_url . 'main_alone_slider.php';
+include $include_url . 'main_video_slider.php';
+
+// ======
+include $include_url . 'main_partners.php';
+
+include $include_url . 'main_banner.php';
 //=====partials===========
 get_footer();

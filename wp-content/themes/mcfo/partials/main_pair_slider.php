@@ -1,38 +1,45 @@
+<?php $merop=get_category_by_slug('meropriyatiya'); ?>
 <div class="main_pair_slider pagination-slider">
     <div class="conteiner">
         <div class="tltlt-text">
-            <h2>Мероприятия</h2>
+            <h2><?php echo $merop->name; ?></h2>
         </div>
         <div class="filter">
             <ul>
+                <?php 
+                $args = array(
+                        'type'         => 'post',
+                        'child_of'     => 0,
+                        'parent'       => '2',
+                        'orderby'      => 'name',
+                        'order'        => 'ASC',
+                        'hide_empty'   => 1,
+                        'hierarchical' => 1,
+                        'exclude'      => '',
+                        'include'      => '',
+                        'number'       => 0,
+                        'taxonomy'     => 'category',
+                        'pad_counts'   => false,
+                        // полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
+                );
+                $cat_all=get_categories($args);
+                ?>
                 <li>
-                    <input type="radio" name="filter" value="all" id="all" checked>
-                    <label for="#all">
+                    <input type="radio" name="filter" value="all" id="all2" checked>
+                    <label for="#all2">
                         <span class="butify"></span>
                         <span class="text"> Все </span>
                     </label>
                 </li>
+                <?php foreach ($cat_all as $cat): ?>
                 <li>
-                    <input type="radio" name="filter" value="horeca" id="horeca" >
-                    <label for="#horeca">
+                    <input type="radio" name="filter" value="<?php echo $cat->slug; ?>" id="<?php echo $cat->slug.$cat->term_id; ?>" >
+                    <label for="#<?php echo $cat->slug.$cat->term_id; ?>">
                         <span class="butify"></span>
-                        <span class="text"> HoReCa </span>
+                        <span class="text"> <?php echo $cat->name; ?> </span>
                     </label>
                 </li>
-                <li>
-                    <input type="radio" name="filter" value="retail" id="retail" >
-                    <label for="#retail">
-                        <span class="butify"></span>
-                        <span class="text"> Retail  </span>
-                    </label>
-                </li>
-                <li>
-                    <input type="radio" name="filter" value="office" id="office" >
-                    <label for="#officel">
-                        <span class="butify"></span>
-                        <span class="text"> Office </span>
-                    </label>
-                </li>
+                <?php endforeach; ?>
             </ul> 
         </div>
         <div class="slider">
@@ -56,150 +63,33 @@
                 </div>
             </div>
             <div class="con-slider">                    
-                <ul class="item">
+                 <?php $posts = get_posts ("category=2&orderby=date&numberposts=999"); ?> 
+                <?php if ($posts) : ?>
+                <?php 
+                $count_out=1;
+                foreach ($posts as $post) : setup_postdata ($post);
+                if($count_out==1) echo '<ul class="item">';
+                ?>
                     <li>
                         <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
+                            <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
                         </div>
-                        <div class="date">21/06/2016</div>
+                        <div class="date"><?php echo get_the_date('d/m/Y'); ?></div>
                         <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
+                            <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
                         </div>
                     </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="item">
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="item">
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="item">
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="item">
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="item">
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="item">
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
-                        </div>
-                        <div class="date">21/06/2016</div>
-                        <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                        </div>
-                    </li>
-                </ul>
+                <?php 
+                if($count_out==2){ echo '</ul>'; $count_out=1;}else{$count_out++;}
+                
+                  endforeach;
+                  wp_reset_postdata();
+                ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="going-to">
-            <a href="#">Перейти в раздел »</a>
+            <a href="<?php echo get_category_link($merop); ?>">Перейти в раздел »</a>
         </div>
     </div>
 </div>
