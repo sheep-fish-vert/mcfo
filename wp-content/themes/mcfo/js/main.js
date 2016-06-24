@@ -482,11 +482,21 @@ $(document).ready(function(){
         $('.main_slider .sliding').slick({
             dots: true,
             infinite: true,
-            speed: 300,
+            arrows: true,
+            speed: 500,
+            autoplay: false,
             slidesToShow: 1,
             adaptiveHeight: false
         });
     }
+
+    $('.main_slider .arrows>.prew').click(function(){
+        $('.sliding .slick-prev').click();
+    });
+
+    $('.main_slider .arrows>.next').click(function(){
+        $('.sliding .slick-next').click();
+    });
 
 
 });
