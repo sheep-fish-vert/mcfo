@@ -71,9 +71,9 @@
                 if($count_out==1) echo '<ul class="item">';
                 ?>
                     <li>
-                        <div class="con">
+                        <a href="<?php the_permalink() ?>" class="con">
                             <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
-                        </div>
+                        </a>
                         <div class="date"><?php echo get_the_date('d/m/Y'); ?></div>
                         <div class="aftertext">
                             <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
@@ -89,7 +89,9 @@
             </div>
         </div>
         <div class="going-to">
-            <a href="<?php echo get_category_link($merop); ?>">Перейти в раздел »</a>
+            <?php foreach ($cat_all as $cat): ?>
+            <a href="<?php echo get_category_link($cat); ?>"><?php echo $cat->name; ?> »</a>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="main_slider">
-    <div class="conteiner">
+    <div class="conteiner slider">
         <div class="arrows">
             <div class="prew">
                 <div class="con">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="sliding">
+        <div class="sliding con-slider">
             <?php while(have_rows('слайдер')): the_row(); ?>
                 <?php 
                     $pic = get_sub_field('изображение');

@@ -1,5 +1,5 @@
-<?php $merop=get_category_by_slug('информационные-партнёры'); ?>
-<div class="partners ">
+<?php $merop=get_category_by_slug('члены'); ?>
+<div class="partners">
     <div class="conteiner">
         <div class="tltlt-text">
             <h2> <?php echo $merop->name; ?>  </h2>
@@ -21,15 +21,18 @@
                     </div>
                 </div>
             </div>
-            <div class="con-slider"> 
-                <?php $posts = get_posts ("category=15&orderby=date&numberposts=999"); 
+            <div class="con-slider">  
+                
+                <?php $posts = get_posts ("category=6&orderby=date&numberposts=999"); 
                 if ($posts) : 
                 foreach ($posts as $post) : setup_postdata ($post);
                 ?>
                 <div class="item">
-                    <a class="con" href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
-                        <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                    </a>
+                    <div class="con">
+                        <a href="<?php echo get_field('ссылка_члены_асоциации'); ?>" title="<?php the_title(); ?>">
+                            <img src="<?php echo get_field('иконка_члены_асоциации'); ?>" alt="<?php the_title(); ?>">
+                        </a>
+                    </div>
                 </div>
                 <?php 
                     endforeach; 

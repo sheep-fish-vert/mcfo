@@ -5,8 +5,10 @@
             <meta name="viewport" content="width=device-width">
             <meta id="viewport" name="viewport" content="width=1200,user-scalable=yes">
             <title><?php wp_title(); ?></title>
+            <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
             <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,400italic,600italic,700,700italic,800italic,800&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" href="<?php echo $template_url; ?>/css/style.css" >
+            <link rel="stylesheet" href="<?php echo $template_url; ?>/css/custom.css" >
             <link rel="profile" href="http://gmpg.org/xfn/11">
             <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
             <?php wp_head(); ?>

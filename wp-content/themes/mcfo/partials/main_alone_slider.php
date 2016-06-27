@@ -1,38 +1,45 @@
+<?php $merop=get_category_by_slug('новости'); ?>
 <div class="main_alone_slider pagination-slider">
     <div class="conteiner">
         <div class="tltlt-text">
-            <h2>новости</h2>
+            <h2><?php echo $merop->name; ?></h2>
         </div>
         <div class="filter">
             <ul>
                 <li>
-                    <input type="radio" name="filter" value="all" id="all" checked>
-                    <label for="#all">
+                    <input type="radio" name="filter" value="all" id="all7" checked>
+                    <label for="#all7">
                         <span class="butify"></span>
                         <span class="text"> Все </span>
                     </label>
                 </li>
+                <?php 
+                $args = array(
+                        'type'         => 'post',
+                        'child_of'     => 0,
+                        'parent'       => '7',
+                        'orderby'      => 'name',
+                        'order'        => 'ASC',
+                        'hide_empty'   => 1,
+                        'hierarchical' => 1,
+                        'exclude'      => '',
+                        'include'      => '',
+                        'number'       => 0,
+                        'taxonomy'     => 'category',
+                        'pad_counts'   => false,
+                        // полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
+                );
+                $cat_all=get_categories($args);
+                ?>
+                <?php foreach ($cat_all as $cat): ?>
                 <li>
-                    <input type="radio" name="filter" value="horeca" id="horeca" >
-                    <label for="#horeca">
+                    <input type="radio" name="filter" value="<?php echo $cat->slug; ?>" id="<?php echo $cat->slug.$cat->term_id; ?>" >
+                    <label for="#<?php echo $cat->slug.$cat->term_id; ?>">
                         <span class="butify"></span>
-                        <span class="text"> HoReCa </span>
+                        <span class="text"> <?php echo $cat->name; ?> </span>
                     </label>
                 </li>
-                <li>
-                    <input type="radio" name="filter" value="retail" id="retail" >
-                    <label for="#retail">
-                        <span class="butify"></span>
-                        <span class="text"> Retail  </span>
-                    </label>
-                </li>
-                <li>
-                    <input type="radio" name="filter" value="office" id="office" >
-                    <label for="#officel">
-                        <span class="butify"></span>
-                        <span class="text"> Office </span>
-                    </label>
-                </li>
+                <?php endforeach; ?>
             </ul> 
         </div>
         <div class="slider">
@@ -56,22 +63,37 @@
                 </div>
             </div>
             <div class="con-slider">                    
+                
+                    <?php $posts = get_posts ("category=7&orderby=date&numberposts=999"); ?> 
+                    <?php if ($posts) : ?>
+                    <?php 
+                    foreach ($posts as $post) : setup_postdata ($post);
+                    ?>
                 <ul class="item">
                     <li>
+                        
                         <div class="con">
-                            <img src="images/sl-i1.jpg" alt="">
+                            <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
                         </div>
-                        <div class="date">21/06/2016</div>
+                        <div class="date"><?php echo get_the_date('d/m/Y'); ?></div>
                         <div class="aftertext">
-                            <a href="">Что такое Lorem Ipsum? Почему он используется?</a>
-                            <p>Есть много вариантов Lorem Ipsum, но большинство из них имеет не всегда приемлемые модификации, например, юмористические вставки или слова, которые даже отдалённо не напоминают латынь.</p>
+                            <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
+                            <p><?php echo get_field('краткое_описание_новости'); ?></p>
                         </div>
                     </li>
                 </ul>
+                    <?php 
+                      endforeach;
+                      wp_reset_postdata();
+                      endif;
+                    ?>
+                
             </div>
         </div>
         <div class="going-to">
-            <a href="#">Перейти в раздел »</a>
+            <?php foreach ($cat_all as $cat): ?>
+            <a href="<?php echo get_category_link($cat); ?>"><?php echo $cat->name; ?> »</a>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
